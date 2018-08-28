@@ -1,0 +1,194 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  background-color: #F5F5F5;
+  font-family: "PingFangSC-Regular", Helvetica, Arial, "Microsoft YaHei", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.wrapper {
+  min-height: 100%;
+  padding: 0 .36rem;
+}
+
+.division {
+  height: .02rem;
+  background-color: #f5f5f5;
+}
+
+.card {
+  background: #FFFFFF;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  height: 3.76rem;
+  margin-top: .36rem;
+  padding: 0 .36rem;
+}
+
+.card_text_left {
+  font-weight: bold;
+  font-size: .28rem;
+  color: #333333;
+  letter-spacing: 0.6px;
+  line-height: .28rem;
+}
+
+.card_text_right {
+  font-size: .28rem;
+  color: #666666;
+  letter-spacing: 0;
+  text-align: right;
+  line-height: .28rem;
+  margin-left: .36rem;
+}
+
+.tip {
+  font-size: .24rem;
+  color: #666666;
+  letter-spacing: 0;
+  line-height: .36rem;
+  margin-top: .24rem;
+}
+
+.commonUI-mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 .02rem .1rem 0;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.commonUI-alert {
+  position: absolute;
+  width: 6.42rem;
+  height: 4rem;
+  background-color: #fff;
+  border-radius: .24rem;
+  font-size: 0.28rem;
+  background-clip: padding-box;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.commonUI-alertTitle {
+  font-weight: bolder;
+  font-size: .3rem;
+  color: #333333;
+  letter-spacing: .012rem;
+  text-align: center;
+  line-height: .3rem;
+  margin-top: .72rem;
+}
+
+.commonUI-alertTop {
+  font-size: .28rem;
+  color: #666666;
+  margin-top: .24rem;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: .42rem;
+  padding: 0 .76rem;
+}
+
+.commonUI-alertBottom {
+  margin-top: .48rem;
+  margin-bottom: .72rem;
+  font-weight: bold;
+  color: #ED171F;
+  letter-spacing: .03rem;
+  text-align: center;
+}
+
+.commonUI-alertButton[data-btn="Yes"] {
+  width: 2.28rem;
+  height: .72rem;
+  float: right;
+  font-size: 0.28rem;
+  font-weight: bolder;
+  background: #ED171F;
+  color: #fff;
+  border-radius: .24rem;
+  border-left: .02rem solid #d4d4d4;
+  text-align: center;
+  letter-spacing: 1.75px;
+  line-height: .3rem;
+  margin-right: .8rem;
+
+}
+
+.commonUI-alertButton[data-btn="No"] {
+  width: 2.28rem;
+  height: .72rem;
+  font-size: 0.28rem;
+  font-weight: bolder;
+  float: left;
+  background-color: #fff;
+  border: .02rem solid #ED171F;
+  border-radius: .24rem;
+  color: #ED171F;
+  letter-spacing: 1.75px;
+  text-align: center;
+  line-height: .3rem;
+  margin-left: .8rem;
+}
+
+.commonUI-loading-mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.commonUI-loading {
+  position: fixed;
+  width: 1.6rem;
+  /*height: 1.8rem;*/
+  top: 50%;
+  margin-top: -0.9rem;
+  left: 50%;
+  margin-left: -0.8rem;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 0.2rem;
+  padding: 0.2rem;
+  /*transform: translate(-50%, -50%);*/
+  /*-webkit-transform: translate(-50%, -50%);*/
+  min-width: 1.2rem;
+  max-width: 3rem;
+}
+
+.commonUI-loadingText {
+  width: 100%;
+  /*line-height: 0.48rem;*/
+  color: white;
+  text-align: center;
+  font-size: 0.24rem;
+  margin-top: 0.1rem;
+}
+
+.commonUI-loadingPic {
+  position: relative;
+  width: 1.2rem;
+  height: 1rem;
+  margin: 0 auto;
+  background-size: 100% 100%;
+  background-image: url("../image/loading.gif");
+}

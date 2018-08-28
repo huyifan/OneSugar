@@ -1,0 +1,132 @@
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: PingFangSC-Regular;
+  overflow: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+.open_card_title {
+  font-weight: bolder;
+  font-size: .28rem;
+  color: #333333;
+  letter-spacing: .12rem;
+  text-align: center;
+  line-height: .28rem;
+  padding-top: .6rem;
+}
+
+.open_card_tip {
+  font-size: .24rem;
+  color: #666666;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: .24rem;
+  margin-top: .12rem;
+  margin-bottom: .6rem;
+}
+
+.card_text_left {
+  font-weight: bold;
+  font-size: .28rem;
+  color: #333333;
+  letter-spacing: 0.6px;
+  line-height: .28rem;
+}
+
+.card_text_right {
+  font-size: .28rem;
+  color: #666666;
+  letter-spacing: 0;
+  text-align: right;
+  line-height: .28rem;
+  margin-left: .36rem;
+}
+
+.tip {
+  font-size: .24rem;
+  color: #666666;
+  letter-spacing: 0;
+  line-height: .36rem;
+  margin-top: .24rem;
+}
+
+.checkInfo {
+  margin-top: 0.4rem;
+  font-weight: bold;
+  font-size: .28rem;
+  color: #666;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 0.36rem;
+  line-height: 0.36rem;
+}
+
+.user-agree, .user-agree-info {
+  width: 0.36rem;
+  height: 0.36rem;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 0.12rem;
+}
+
+.checked {
+  background: url('../../common/image/checked.png');
+  background-size: 100% 100%;
+}
+
+.checked-square {
+  background: url('../../common/image/checked-square.png');
+  background-size: 100% 100%;
+  vertical-align: middle;
+}
+
+.uncheck {
+  background: url('../../common/image/uncheck.png');
+  background-size: 100% 100%;
+}
+
+.uncheck-square {
+  background: url('../../common/image/uncheck-square.png');
+  background-size: 100% 100%;
+  vertical-align: middle;
+}
+
+.protocol {
+  font-weight: bold;
+  font-size: .28rem;
+  color: #5797d4;
+  letter-spacing: 0;
+  line-height: .28rem;
+  margin-left: .14rem;
+}
+
+.btn {
+  width: 2.28rem;
+  height: .72rem;
+  background: #ED171F;
+  border-radius: .24rem;
+  font-weight: bolder;
+  font-size: .28rem;
+  color: #FFFFFF;
+  letter-spacing: 1.75px;
+  text-align: center;
+  line-height: .3rem;
+  margin: .52rem 2.6rem;
+}
+
+.disableBtn {
+  background: #8a86f3;
+}
+
+
+
+
+
