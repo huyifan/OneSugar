@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  width: 359px;
+  border-radius: 3px !important;
+  border: 1px #e1e4e8 solid !important;
+  padding:10px 20px;
+  margin-right: 7px;
+}
+
+.container-div {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.container-div-header {
+  display: block !important;
+  position: relative !important;
+}
+
+.container-div-header-span {
+  padding-top: 1px;
+  color: #586069;
+}
+
+.octicon {
+  vertical-align: text-bottom;
+}
+
+.text-bold {
+  font-weight: 600 !important;
+}
+
+.repo-language-color {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
