@@ -4,7 +4,7 @@ let ObjectId = Schema.Types.ObjectId
 let Number = Schema.Types.Number 
 let userSchema = new mongoose.Schema({ 
 	email: {unique: true,type: String},
-	zan: Number,
+	zan: Number(6),
 	password: String,
 	access: String,
 	name: String,

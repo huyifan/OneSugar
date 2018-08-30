@@ -5,12 +5,14 @@
   "main": "init.js",
   "scripts": {
     "init": "node init ",
-    "reinit": "DEL application\\controller /Q && DEL application\\model /Q && DEL application\\schema /Q && node init ",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha application/test/*"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
+    "express": "^4.16.3",
     "koa": "^2.5.2",
     "log4js": "^3.0.5",
     "moment": "^2.22.2",

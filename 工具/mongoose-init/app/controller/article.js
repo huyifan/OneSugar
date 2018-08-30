@@ -11,9 +11,6 @@ exports.create = function (req, res) {
   let bean = req.body.article || {}
   sysLogger.info("Create article | bean:", bean)
 
-  if (!bean) {
-    return Info.returnErr(res, '请求体为null')
-  }
 
   articleSchema.create(bean)
     .then((err, result) => {
@@ -28,13 +25,11 @@ exports.find = function (req, res) {
   let query = req.body.query || {}
   let queryObj = {}
 
-
-  sysLogger.info("Find article | query:", query)
-
-  Object.keys(query).map((v, i) => {
+  query.keys().map((v, i) => {
     if (query[v]) queryObj[v] = query[v]
   })
 
+  sysLogger.info("Find article | queryObj:", queryObj)
 
   articleSchema.find(query)
     .then((err, datas) => Info.returnSuccess(res, '查找成功', datas))

@@ -1,9 +1,8 @@
 /**
  * Created by hugo on 2018/3/19.
  */
-const log4js = require('../../public/untils/Logger')
+const log4js = require('./Logger')
 const sysLogger = log4js.getLogger('sys')
-
 exports.returnErrWithCode = (res, code, msg) => {
   let resp = {
     status: code,
@@ -11,7 +10,7 @@ exports.returnErrWithCode = (res, code, msg) => {
     data: null
   }
 
-  sysLogger.error("error-return:" + resp)
+  sysLogger.error("error-return:",resp)
 
   return res.jsonp(resp)
 }
@@ -27,7 +26,7 @@ exports.returnSuccessWithCode = (res, code, msg, data) => {
     statusText: msg,
     data: data
   }
-  sysLogger.info("success-return:" + resp)
+  sysLogger.info("success-return:",resp)
   return res.jsonp(resp)
 }
 

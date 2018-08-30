@@ -14,7 +14,7 @@ log4js.configure({
     },//设置是否在控制台打印日志
     req: {//请求日志
       type: 'dateFile',
-      filename: 'logs/',
+      filename: '../logs/',
       pattern: 'req-yyyy-MM-dd.log',
       alwaysIncludePattern: true,
       layout: {
@@ -24,7 +24,7 @@ log4js.configure({
     },
     err: {//错误日志
       type: 'dateFile',
-      filename: 'logs/',
+      filename: '../logs/',
       maxLogSize: 31457280, //3M
       pattern: 'err-yyyy-MM-dd.log',
       keepFileExt: true,
@@ -36,7 +36,7 @@ log4js.configure({
     },
     sys: { //系统操作日志
       type: 'dateFile',
-      filename: 'logs/',
+      filename: '../logs/',
       maxLogSize: 61457280, //6M
       pattern: 'info-yyyy-MM-dd.log',
       keepFileExt: true,

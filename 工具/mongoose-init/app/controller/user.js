@@ -1,21 +1,18 @@
 /**
  * Created by hugo on 2018/8/29.
  */
-const articleSchema = require('../model/article')
+const userSchema = require('../model/user')
 const Logger = require('../../public/Logger')
 const Info = require('../../public/Info')
 const sysLogger = Logger.getLogger('sys')
 const moment = require('moment')
 
 exports.create = function (req, res) {
-  let bean = req.body.article || {}
-  sysLogger.info("Create article | bean:", bean)
+  let bean = req.body.user || {}
+  sysLogger.info("Create user | bean:", bean)
 
-  if (!bean) {
-    return Info.returnErr(res, '请求体为null')
-  }
 
-  articleSchema.create(bean)
+  userSchema.create(bean)
     .then((err, result) => {
       if (err)
         return Info.returnErr(res, 'error:' + err)
@@ -28,32 +25,30 @@ exports.find = function (req, res) {
   let query = req.body.query || {}
   let queryObj = {}
 
-
-  sysLogger.info("Find article | query:", query)
-
-  Object.keys(query).map((v, i) => {
+  query.keys().map((v, i) => {
     if (query[v]) queryObj[v] = query[v]
   })
 
+  sysLogger.info("Find user | queryObj:", queryObj)
 
-  articleSchema.find(query)
+  userSchema.find(query)
     .then((err, datas) => Info.returnSuccess(res, '查找成功', datas))
 }
 
 exports.update = function (req, res) {
-  let bean = req.body.article || {}
+  let bean = req.body.user || {}
   let query = req.body.query || {}
-  sysLogger.info("Update article | bean:", bean)
+  sysLogger.info("Update user | bean:", bean)
 
-  articleSchema.update(query, bean)
+  userSchema.update(query, bean)
     .then((err, result) => Info.returnSuccess(res, '更新成功', result))
 }
 
 exports.delete = function (req, res) {
   let query = req.body.query || {}
-  sysLogger.info("remove article | query:", query)
+  sysLogger.info("remove user | query:", query)
 
-  articleSchema.remove(query)
+  userSchema.remove(query)
     .then((err, result) => {
       if (err) return Info.returnErr(res, 'error' + err)
       return Info.returnSuccess(res, '删除成功', null)

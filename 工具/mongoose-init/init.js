@@ -3,12 +3,33 @@
  */
 const baseBeans = require('./beans')
 const fs = require("fs")
+const util = require('./public/util')
 
+//每次运行前清空application的目录
+util.emptyDir('application')
+
+let envPath = __dirname + '/application/conf/env.js'
+let appPath = __dirname + '/application/app.js'
 
 isCatalogExistAndMake('application')
+isCatalogExistAndMake('application/conf')
+isCatalogExistAndMake('application/test')
+isCatalogExistAndMake('application/conf/router')
 isCatalogExistAndMake('application/schema')
 isCatalogExistAndMake('application/model')
 isCatalogExistAndMake('application/controller')
+
+if (!fs.existsSync(envPath)) {
+  let writable = fs.createWriteStream(envPath)
+  writable.write(fs.readFileSync('./tpl/env.js').toString())
+  writable.end()
+}
+
+if (!fs.existsSync(appPath)) {
+  let writable = fs.createWriteStream(appPath)
+  writable.write(fs.readFileSync('./tpl/app.js').toString())
+  writable.end()
+}
 
 
 baseBeans.map((v, i) => {
@@ -16,18 +37,38 @@ baseBeans.map((v, i) => {
   let schemaPath = __dirname + '/application/schema/' + v.bean + '.js'
   let modelPath = __dirname + '/application/model/' + v.bean + '.js'
   let controllerPath = __dirname + '/application/controller/' + v.bean + '.js'
-  //在app的schema下创建相应的文件
+  let routerPath = __dirname + '/application/conf/router/' + v.bean + '.js'
+
+  fs.exists(routerPath, exists => {
+    if (!exists) {
+      console.log("router：" + v.bean + '.js 不存在，正在创建')
+      let writable = fs.createWriteStream(routerPath)
+      let text = fs.readFileSync('./tpl/router.js').toString();
+      text = text.replace(new RegExp('XXX', "g"), v.bean);
+      writable.write(text)
+      writable.end()
+    }
+  })
+
+
   fs.exists(modelPath, exists => {
     if (!exists) {
       console.log("model文件：" + v.bean + '.js 不存在，正在创建')
       let writable = fs.createWriteStream(modelPath)
-      let modelStr = "" +
-        "let mongoose = require('mongoose')\n" +
-        "let " + v.bean + "Schema = require('../schema/" + v.bean + "')\n" +
-        "let " + v.bean + " = mongoose.model('" + v.bean + "', " + v.bean + "Schema)\n" +
-        "module.exports = " + v.bean
-      writable.write(modelStr)
+      let text = fs.readFileSync('./tpl/model.js').toString();
+      text = text.replace(new RegExp('XXX', "g"), v.bean);
+      writable.write(text)
+      writable.end()
+    }
+  })
 
+  fs.exists(controllerPath, exists => {
+    if (!exists) {
+      console.log("controller文件：" + v.bean + '.js 不存在，正在创建')
+      let writable = fs.createWriteStream(controllerPath)
+      let text = fs.readFileSync('./tpl/controller.js').toString();
+      text = text.replace(new RegExp('XXX', "g"), v.bean);
+      writable.write(text)
       writable.end()
     }
 
@@ -53,7 +94,7 @@ baseBeans.map((v, i) => {
       let intParams = ""
 
       v.intField && v.intField.map((int, i) => {
-        intParams += "\t" + int + ": Number(6),\n"
+        intParams += "\t" + int + ": Number,\n"
       })
 
       v.strField && v.strField.map((str, i) => {
@@ -63,14 +104,14 @@ baseBeans.map((v, i) => {
       v.refField && v.refField.map((ref, i) => {
         let refArr = ref.split('-')
         if (refArr.length === 1)
-          refParams += "\t" + ref + ": {type:ObjectId,ref:\'" + ref + "\'},\n"
+          refParams += "\t" + ref + ": {type: ObjectId,ref:\'" + ref + "\'},\n"
         else
-          refParams += "\t" + refArr[0] + ": {type:ObjectId,ref:\'" + refArr[1] + "\'},\n"
+          refParams += "\t" + refArr[0] + ": {type: ObjectId,ref:\'" + refArr[1] + "\'},\n"
 
       })
 
       v.uniField && v.uniField.map((ref, i) => {
-        uniParams += "\t" + ref + ": {unique:true,type:String},\n"
+        uniParams += "\t" + ref + ": {unique: true,type: String},\n"
       })
 
       writable.write(uniParams)
@@ -88,75 +129,18 @@ baseBeans.map((v, i) => {
 
 
   })
-  fs.exists(controllerPath, exists => {
-    if (!exists) {
-      console.log("controller文件：" + v.bean + '.js 不存在，正在创建')
-      let writable = fs.createWriteStream(controllerPath)
 
-      writable.write("const " + v.bean + "Schema = require(\'../model/" + v.bean + "\') \n")
-      writable.write("const Logger= require(\'../public/Logger\') \n")
-      writable.write("const Info= require(\'../public/Info\') \n")
-      writable.write("const sysLogger= Logger.getLogger(\'sys\') \n")
-      writable.write("const moment= require(\'moment\') \n\n")
-
-
-      writable.write("exports.create = function(req, res) {" +
-        "\tlet bean=req.body." + v.bean + " || {} \n" +
-        "\tlet query=req.body.query || {} \n" +
-        "\tsysLogger.info(\"Update " + v.bean + " | bean:\",bean) \n\n" +
-        "\t" + v.bean + "Schema.create(query,bean) \n" +
-        "\t.then((err,result)=> {if(err) return Info.returnErr(res,'error:'+err) return Info.returnSuccess(res,'更新成功',datas)})\n" +
-        " }\n\n")
-
-      writable.write("exports.find = function(req, res) {" +
-        "\tlet query=req.body.query || {} \n" +
-        "\tlet queryObj={} \n\n" +
-        "\tquery.keys().map((v,i)=>{ if(query[v])queryObj[v]=query[v] }) \n\n" +
-        "\tsysLogger.info(\"Find " + v.bean + " | queryObj:\",queryObj) \n\n" +
-        "\t" + v.bean + "Schema.find(query) \n" +
-        "\t.then((err,datas)=> Info.returnSuccess(res,'查找成功',datas))\n" +
-        " }\n\n")
-
-      writable.write("exports.update = function(req, res) {" +
-        "\tlet bean=req.body." + v.bean + " || {} \n" +
-        "\tlet query=req.body.query || {} \n" +
-        "\tsysLogger.info(\"Update " + v.bean + " | bean:\",bean) \n\n" +
-        "\t" + v.bean + "Schema.update(query,bean) \n" +
-        "\t.then((err,result)=> Info.returnSuccess(res,'更新成功',datas))\n" +
-        " }\n\n")
-
-      writable.write("exports.delete = function(req, res) {" +
-        "\tlet query=req.body.query || {} \n" +
-        "\tsysLogger.info(\"remove " + v.bean + " | query:\",query) \n\n" +
-        "\t" + v.bean + "Schema.remove(query) \n" +
-        "\t.then((err,result)=> {if(err) return Info.returnErr(res,'error'+err) return Info.returnSuccess(res,'删除成功',null)})\n" +
-        " }\n\n")
-
-
-      writable.end()
-
-    }
-
-
-  })
 })
 
 
 function isCatalogExistAndMake(path) {
   let realPath = __dirname + '/' + path
-  fs.exists(realPath, exists => {
-    if (!exists) {
-      console.log('目录' + realPath + '不存在,正在创建……')
-      fs.mkdir(realPath, err => {
-        if (err) {
-          console.log('创建目录' + realPath + '失败')
-          return
-        }
-        console.log('创建目录' + realPath + '成功')
-      })
-    }
+  if (!fs.existsSync(realPath)) {
+    console.log('目录' + realPath + '不存在,正在创建……')
+    fs.mkdirSync(realPath)
+    console.log('创建目录' + realPath + '成功')
+  }
 
-  })
 }
 
 
