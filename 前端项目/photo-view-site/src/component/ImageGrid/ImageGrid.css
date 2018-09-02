@@ -1,0 +1,38 @@
+.user_img {
+    height: 1.2rem;
+    min-height: 95px;
+    width: 1.2rem;
+    min-width: 95px;
+    margin: .08rem auto;
+}
+
+.card_name{
+    font-weight: bold;
+}
+
+.grid_card_style {
+    -moz-box-shadow: -1px 2px 20px rgba(6, 29, 99, 0.57);
+    -webkit-box-shadow: -1px 2px 20px rgba(194, 102, 134, 0.52);
+    box-shadow: -1px 2px 20px rgba(195, 67, 119, 0.44);
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 200px;
+}
+
+
+.ant-card-actions > li > span > .anticon {
+    font-size: 16px;
+    line-height: 22px;
+    display: inline-flex;
+    width: 100%;
+}
+
+.ant-card-head {
+    background: #e1faff;;
+    padding: 0 24px;
+    border-radius: 5px;
+    zoom: 1;
+    margin-bottom: -1px;
+    min-height: 48px;
+    color: #fff;
+}
