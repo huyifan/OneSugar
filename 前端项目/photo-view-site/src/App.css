@@ -1,0 +1,32 @@
+@font-face {
+    /* font-test*/
+    font-family: Chinese Quote;
+    src: url('./static/youyuan.ttf');
+
+}
+
+html body {
+    font-size: 100px;
+    font-family: Chinese Quote;
+
+}
+
+#root {
+    height: 100%;
+}
+
+.layout_style {
+    margin-top: 10px;
+    padding: 10px 0;
+    background: #fff;
+    min-height: 6rem;
+    border-radius: 15px;
+    -moz-box-shadow: -6px 9px 20px rgba(18, 144, 190, 0.67), 1px -3px 20px #333333;
+    -webkit-box-shadow: -6px 9px 20px rgba(56, 251, 255, 0.18), 1px -3px 20px #333333;
+    box-shadow: -6px 9px 20px rgba(7, 16, 51, 0.37), 1px -3px 20px #333333;
+}
+
+.sider_style {
+    background: #fff;
+    min-width: 180px;
+}
