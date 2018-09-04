@@ -1,15 +1,3 @@
-@font-face {
-    /* font-test*/
-    font-family: Chinese Quote;
-    src: url('./static/youyuan.ttf');
-
-}
-
-html body {
-    font-family: Chinese Quote;
-
-}
-
 #root {
     height: 100%;
 }
@@ -28,4 +16,19 @@ html body {
 .sider_style {
     background: #fff;
     min-width: 180px;
+}
+
+.ant-layout-sider-trigger {
+  position: inherit;
+  text-align: center;
+  bottom: 0;
+  cursor: pointer;
+  height: 48px;
+  line-height: 48px;
+  color: #111111;
+  background-color: #fff;
+  z-index: 1;
+  -webkit-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
 }
