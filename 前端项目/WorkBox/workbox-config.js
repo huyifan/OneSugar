@@ -1,5 +1,5 @@
 module.exports = {
-  swDest: 'workbox-injectManifest-config.js',
+  swDest: 'sw-webpack.js',
   globPatterns: [
     "**/*.{html,ico,svg,png,js,css}"
   ],

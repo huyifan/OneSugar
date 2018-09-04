@@ -1,0 +1,17 @@
+{
+  "name": "workbox-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sw-gen": "workbox generateSW workbox-generateSW-config.js",
+    "sw-inj": "workbox injectManifest workbox-injectManifest-config"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.5.2",
+    "koa-static": "^5.0.0"
+  }
+}

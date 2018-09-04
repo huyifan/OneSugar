@@ -84,7 +84,7 @@
     // 为了保证首屏渲染性能，可以在页面 load 完之后注册 Service Worker
     console.log("register serviceworker")
     window.onload = function () {
-      navigator.serviceWorker.register('sw.js')
+      navigator.serviceWorker.register('sw-webpack.js')
         .then(function (registration) {
           //注册成功
           console.log('service work 注册成功 with scope:' + registration.scope)

@@ -2,8 +2,8 @@
  * Created by hugo on 2018/8/29.
  */
 require('../css/index.css')
-require('../js/index1')
-require('../js/index2')
+require('./index1')
+require('./index2')
 importScripts('http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js');
 importScripts('http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js');
 importScripts('http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css');
