@@ -1,5 +1,6 @@
 module.exports = {
-  swDest: 'sw-webpack.js',
+  swDest: 'sw-gen.js',
+  globDirectory: "src/dist",
   globPatterns: [
     "**/*.{html,ico,svg,png,js,css}"
   ],
@@ -12,9 +13,11 @@ module.exports = {
       handler: 'cacheFirst',
       options: {
         cacheName: 'app-cache',
-        expiration: {
-          maxEntries: 5,
-          maxAgeSeconds: 60 * 10,
+        broadcastUpdate: {//缓存更新通知
+          channelName: 'api-updates',
+          options: {
+            headersToCheck: ['date']
+          }
         },
         cacheableResponse: {
           statuses: [0, 200]

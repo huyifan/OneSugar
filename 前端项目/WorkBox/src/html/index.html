@@ -76,6 +76,12 @@
 
   <div class="btn btn-success" id="btSign">签到</div>
 
+  <div>服务器返回数据</div>
+  <div id="serviceData"></div>
+  <div class="btn btn-success" id="btgetData1">获取数据1</div>
+  <div class="btn btn-success" id="btgetData2">获取数据2</div>
+  <div class="btn btn-success" id="btUpdateCache">手动更新缓存</div>
+
 </div>
 
 <script>
@@ -84,7 +90,7 @@
     // 为了保证首屏渲染性能，可以在页面 load 完之后注册 Service Worker
     console.log("register serviceworker")
     window.onload = function () {
-      navigator.serviceWorker.register('sw-webpack.js')
+      navigator.serviceWorker.register('sw-inj.js')
         .then(function (registration) {
           //注册成功
           console.log('service work 注册成功 with scope:' + registration.scope)

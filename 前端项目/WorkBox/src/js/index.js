@@ -4,10 +4,6 @@
 require('../css/index.css')
 require('./index1')
 require('./index2')
-importScripts('http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js');
-importScripts('http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js');
-importScripts('http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css');
-importScripts('http://cdn.bootcss.com/bootstrap/3.3.7/fonts/glyphicons-halflings-regular.woff2');
 
 $(document).ready(function () {
 
@@ -28,26 +24,18 @@ $(document).ready(function () {
   })
 
   $("#btLogin").click(function () {
-    //登录
-    if ($("#email").val() === 'user1') {
-      showHeaderInfo('user')
-      //添加缓存
-      localStorage.setItem('user', JSON.stringify({
-        name: 'user1',
-        hasSign: 'false',
-        info: 'user1'
-      }))
-    }
+    //登录模拟服务器请求POST
 
-    if ($("#email").val() === 'user2') {
-      showHeaderInfo('user')
-      //添加缓存
-      localStorage.setItem('user', JSON.stringify({
-        name: 'user2',
-        hasSign: 'true',
-        info: 'user1'
-      }))
+    //登录成功
+    showHeaderInfo('user')
+    var respData = {
+      id: 1,
+      name: $("#email").val(),
+      hasSign: 'false',
+      info: 'user1'
     }
+    //添加缓存
+    localStorage.setItem('user', JSON.stringify(respData))
 
 
   })
@@ -55,7 +43,6 @@ $(document).ready(function () {
 
   $("#btLogout").click(function () {
     showHeaderInfo()
-
     //清除缓存
     localStorage.removeItem("user");
 
@@ -63,12 +50,58 @@ $(document).ready(function () {
 
 
   $("#btSign").click(function () {
-    $.get("http://172.20.183.62:3344/sign.capi", function (result) {
-      if(result.code===200){
+    var user = JSON.parse(localStorage.getItem('user'))
+    $.get("http://172.20.183.62:3344/CAPI/sign?uid=" + user.id, function (result) {
+      if (result.code === 200) {
         console.log('签到成功')
       }
     });
   })
+
+
+  $("#btgetData1").click(function () {
+    $.get("http://172.20.183.62:3344/CAPI/getData?page=1", function (result) {
+      if (result.code === 200) {
+        console.log('获取数据成功!')
+        $('#serviceData').text(JSON.stringify(result.data))
+
+      }
+    });
+  })
+
+  $("#btgetData2").click(function () {
+    $.get("http://172.20.183.62:3344/CAPI/getData?page=2", function (result) {
+      if (result.code === 200) {
+        console.log('获取数据成功!')
+        $('#serviceData').text(JSON.stringify(result.data))
+
+      }
+    });
+  })
+
+  $("#btUpdateCache").click(function () {
+    var user = JSON.parse(localStorage.getItem('user'))
+    $.get("http://172.20.183.62:3344/CAPI/sign?uid=" + user.id, function (result) {
+      if (result.code === 200) {
+        console.log('签到成功')
+      }
+    });
+  })
+
+
+  const updatesChannel = new BroadcastChannel('api-updates');
+  updatesChannel.addEventListener('message', async (event) => {
+    console.log("==================get message")
+    const {cacheName, updatedUrl} = event.data.payload;
+
+    // Do something with cacheName and updatedUrl.
+    // For example, get the cached content and update
+    // the content on the page.
+    const cache = await caches.open(cacheName);
+    const updatedResponse = await cache.match(updatedUrl);
+    const updatedText = await updatedResponse.text();
+  });
+
 })
 
 
